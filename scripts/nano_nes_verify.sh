@@ -54,7 +54,10 @@ header = bytes([0x4E, 0x45, 0x53, 0x1A,  # "NES\x1a"
                 0, 0, 0, 0, 0, 0, 0, 0])
 rom = header + tri + neural + cls + banks[0:8192] + banks[8192:16384] + banks[16384:24576]
 assert len(rom) == 16 + 1_048_576 + 8192, len(rom)
-open(f"{romdir}/nanocamelid.nes", "wb").write(rom)
+import os
+tmp = f"{romdir}/.nanocamelid.nes.tmp"
+open(tmp, "wb").write(rom)
+os.replace(tmp, f"{romdir}/nanocamelid.nes")  # atomic: kind to auto-reloading emulators
 EOF
 ROM="$ROMDIR/out/nanocamelid.nes"
 echo "    ROM: $ROM ($(wc -c < "$ROM" | tr -d ' ') bytes, mapper 5)"
