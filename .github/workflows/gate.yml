@@ -1,0 +1,46 @@
+name: release-gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install cc65
+        run: sudo apt-get update && sudo apt-get install -y cc65
+
+      - name: Rust cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            target-ci
+          key: ${{ runner.os }}-cargo-${{ hashFiles('tools/nano_nes_model_builder/Cargo.lock') }}
+
+      - name: Build model + ROM, verify canonical parity (headless 6502+MMC5 core)
+        env:
+          CARGO_TARGET_DIR: ${{ github.workspace }}/target-ci
+        run: ./scripts/nano_nes_verify.sh
+
+      - name: Reproducibility — built ROM must match the committed receipts
+        run: |
+          built=$(shasum -a 256 tools/nano_nes_rom/out/nanocamelid.nes | cut -d' ' -f1)
+          committed=$(git show HEAD:docs/nano_nes/receipts/gauntlet_known_questions.json | python3 -c "import json,sys; print(json.load(sys.stdin)['rom_sha256'])")
+          echo "built:     $built"
+          echo "committed: $committed"
+          test "$built" = "$committed"
+
+      - name: Release gate — 252 questions typed via controller, parity vs Rust reference
+        env:
+          CARGO_TARGET_DIR: ${{ github.workspace }}/target-ci
+        run: ./scripts/nano_nes_gauntlet.sh
+
+      - name: Unit + e2e tests
+        env:
+          CARGO_TARGET_DIR: ${{ github.workspace }}/target-ci
+        run: cargo test --release --manifest-path tools/nano_nes_model_builder/Cargo.toml
