@@ -1,0 +1,75 @@
+{
+  "corpus_sha256": "719401712e5ba3c3d39201d7b83175e9acae229bdf360ca5c34f41d29fab6fc5",
+  "emergency_seed": [
+    243,
+    2
+  ],
+  "generation_modes": [
+    "greedy"
+  ],
+  "min_answer_words": 6,
+  "min_words_before_stop": 6,
+  "model_format": "NNW2/MMC5: word-level dense trigram, 16B records of 8x(next,freq), bank=w1>>1 via $5114, record=$8000+(w1&1)*4096+w2*16; bigram fallback in decode bank",
+  "model_format_version": "NNW5-neural1",
+  "model_sha256": "e8e2384eace2556e959f741b0e33e00b76ba25c11e46604f12a558f05a2f30c8",
+  "neural": {
+    "decode": "full-vocab integer argmax on the 6502",
+    "emb_dim": 8,
+    "hid_dim": 16,
+    "sh_h": 7,
+    "sh_out": 8,
+    "trained": "hand-rolled SGD, deterministic LCG init, 350 epochs"
+  },
+  "num_bigram_contexts": 248,
+  "num_route_rows": 79,
+  "num_trigram_contexts": 604,
+  "qtypes": [
+    "WHY",
+    "HOW",
+    "WHAT",
+    "WHO",
+    "WHERE",
+    "WHEN",
+    "CAN",
+    "DO",
+    "DOES",
+    "ARE",
+    "IS"
+  ],
+  "rom_mapper": "5 (MMC5), 1 MiB PRG (125 model banks of 8 KiB), 8 KiB CHR-ROM",
+  "scoring": {
+    "base_max": 63,
+    "bias_max": 15,
+    "len_bonus": 20,
+    "rep_pen": 24,
+    "rep_window": 8,
+    "soft_len": 14
+  },
+  "tokenizer_version": "v4-stem1",
+  "tool": "nano_nes_model_builder/build_model",
+  "top_k": 8,
+  "topics": [
+    "LLAMA",
+    "HERD",
+    "HUM",
+    "WOOL",
+    "FOOD",
+    "PLACE",
+    "LIFE",
+    "NES",
+    "MODEL",
+    "MMC5",
+    "RECEIPTS",
+    "SELF",
+    "GREETING"
+  ],
+  "verification_questions": [
+    "WHY DO LLAMAS HUM?",
+    "WHAT IS YOUR NAME?",
+    "ARE YOU REAL?"
+  ],
+  "vocab_sha256": "da5e74143af667648ca63ff4b4caa525cfb0f0293d906e8108ffc6af13b2a4b9",
+  "vocab_size": 248,
+  "word_budget": 32,
+  "word_count": 921
+}

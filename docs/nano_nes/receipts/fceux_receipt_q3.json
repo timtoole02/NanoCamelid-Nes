@@ -1,0 +1,36 @@
+{
+  "tool": "scripts/nano_nes_fceux_check.sh",
+  "emulator": "FCEUX (third-party, MMC5) via Lua probe typing on the on-screen keyboard",
+  "rom_sha256": "3c3552c1baa35c4053d4ee7df468be588e4215d0d9998ab8075154664db9d748",
+  "model_sha256": "e8e2384eace2556e959f741b0e33e00b76ba25c11e46604f12a558f05a2f30c8",
+  "corpus_sha256": "719401712e5ba3c3d39201d7b83175e9acae229bdf360ca5c34f41d29fab6fc5",
+  "question": "ARE YOU REAL?",
+  "rust_generated_word_ids": [
+    245,
+    0,
+    3,
+    175,
+    145,
+    237,
+    175,
+    199,
+    16,
+    176,
+    1
+  ],
+  "nes_generated_word_ids": [
+    245,
+    0,
+    3,
+    175,
+    145,
+    237,
+    175,
+    199,
+    16,
+    176,
+    1
+  ],
+  "decoded_text": "YES, A REAL MODEL WITH REAL TABLES AND RECEIPTS.",
+  "parity": "PASS"
+}

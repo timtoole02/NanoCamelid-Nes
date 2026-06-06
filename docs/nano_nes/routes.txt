@@ -1,0 +1,103 @@
+# NanoCamelid NES route table — single source of truth for the always-answer
+# layer. Both the Rust reference and the 6502 (via the compiled route table in
+# the decode bank) resolve seeds from these rows, in this order:
+#
+#   A. (implicit) last two known typed words hit a non-empty trigram record
+#   B. qtype + topic rows (below, no wildcard)
+#   C. topic-only rows   (qtype = *)
+#   D. qtype-only rows   (topic = *)
+#   E. (implicit) global unknown -> bigram("?") fallback family
+#   F. (implicit) emergency reseed if the answer is shorter than 6 words
+#
+# Syntax: QTYPE TOPIC -> SEED_W1 SEED_W2     (* = wildcard)
+# Every word must exist in the corpus vocabulary; every seed pair must
+# generate >= 6 words. The builder enforces both.
+
+# --- B: qtype + topic ---
+WHY HUM -> HUM ?
+WHY HUMS -> HUM ?
+WHY HUMMING -> HUM ?
+ARE REAL -> REAL ?
+IS REAL -> REAL ?
+HOW WORK -> WORK ?
+HOW BIG -> BRAIN ?
+HOW BRAIN -> BRAIN ?
+WHAT MODEL -> MODEL ?
+WHO TIM -> THIS ?
+
+# --- C: topic only ---
+* HUM -> HUM ?
+* HUMS -> HUM ?
+* HUMMING -> HUM ?
+* LLAMA -> LLAMA ?
+* LLAMAS -> LLAMA ?
+* CAMELID -> CAMELID ?
+* CAMELIDS -> CAMELID ?
+* ALPACA -> ALPACA ?
+* VICUNA -> VICUNA ?
+* GUANACO -> GUANACO ?
+* NES -> NES ?
+* MODEL -> MODEL ?
+* BRAIN -> BRAIN ?
+* REAL -> REAL ?
+* WORK -> WORK ?
+* BIG -> BRAIN ?
+* HERD -> HERD ?
+* WOOL -> WOOL ?
+* EAT -> EAT ?
+* LIVE -> LIVE ?
+* SPIT -> SPIT ?
+* CARRY -> CARRY ?
+* SLEEP -> SLEEP ?
+* DRINK -> DRINK ?
+* COLD -> COLD ?
+* CRIA -> CRIA ?
+* FAST -> FAST ?
+* TALL -> TALL ?
+* NAME -> NAME ?
+* SMART -> SMART ?
+* LOVE -> LOVE ?
+* HAPPY -> HAPPY ?
+* ANGRY -> ANGRY ?
+* FRIENDS -> FRIENDS ?
+* SHEEP -> SHEEP ?
+* ROM -> ROM ?
+* MMC5 -> MMC5 ?
+* TOKENS -> TOKENS ?
+* INFERENCE -> INFERENCE ?
+* TIM -> THIS ?
+* BUILT -> THIS ?
+* TABLE -> MODEL ?
+* CARTRIDGE -> ROM ?
+
+* VICUNAS -> VICUNA ?
+* ALPACAS -> ALPACA ?
+* GUANACOS -> GUANACO ?
+* CAMELIDS -> CAMELID ?
+* CRIAS -> CRIA ?
+* TABLES -> MODEL ?
+* TRIGRAM -> TRIGRAM ?
+* MAPPER -> MAPPER ?
+* BANKS -> BANKS ?
+* RECEIPTS -> RECEIPTS ?
+* CONSOLE -> NES ?
+* CHIP -> NES ?
+* ALIVE -> ALIVE ?
+* THINK -> THINK ?
+* HELLO -> HELLO ?
+* HI -> HI ?
+
+# --- D: qtype only ---
+WHY * -> HUM ?
+HOW * -> WORK ?
+WHAT * -> CAMELID ?
+WHO * -> FRIENDS ?
+WHERE * -> LIVE ?
+WHEN * -> SLEEP ?
+CAN * -> FAST ?
+DO * -> LOVE ?
+ARE * -> REAL ?
+IS * -> REAL ?
+
+# --- F: emergency reseed context (watchdog) ---
+EMERGENCY -> WOW ?
