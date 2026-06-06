@@ -11,13 +11,13 @@
   "min_words_before_stop": 6,
   "model_format": "NNW2/MMC5: word-level dense trigram, 16B records of 8x(next,freq), bank=w1>>1 via $5114, record=$8000+(w1&1)*4096+w2*16; bigram fallback in decode bank",
   "model_format_version": "NNW5-neural1",
-  "model_sha256": "e8e2384eace2556e959f741b0e33e00b76ba25c11e46604f12a558f05a2f30c8",
+  "model_sha256": "bdc3280b66f7f19dabaef209544f42282ae2cc5da4843e4b85f0c1bab1ec9b37",
   "neural": {
     "decode": "full-vocab integer argmax on the 6502",
     "emb_dim": 8,
     "hid_dim": 16,
     "sh_h": 7,
-    "sh_out": 8,
+    "sh_out": 9,
     "trained": "hand-rolled SGD, deterministic LCG init, 350 epochs"
   },
   "num_bigram_contexts": 248,

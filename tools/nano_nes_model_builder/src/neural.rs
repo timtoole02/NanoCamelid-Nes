@@ -21,6 +21,21 @@ pub const IN_DIM: usize = EMB_DIM * 2;
 pub const BASE_CLAMP: u8 = 48; // neural term is comparable to record bases (1..63)
 pub const NEURAL_LEN: usize = 8192; // bank image size
 
+/// Deterministic exp: pure IEEE mul/add/floor + bit assembly, so training is
+/// bit-identical across platforms (libm's exp() differs between macOS and
+/// glibc — CI caught that). Softmax only needs determinism + monotonicity.
+fn dexp(x: f32) -> f32 {
+    let y = x * std::f32::consts::LOG2_E;
+    let k = y.floor();
+    let f = y - k;
+    let p = 1.0
+        + f * (0.693_147_2
+            + f * (0.240_226_5 + f * (0.055_504_1 + f * (0.009_618_1 + f * 0.001_333_3))));
+    let e = (k as i32).clamp(-126, 127);
+    let scale = f32::from_bits(((e + 127) as u32) << 23);
+    p * scale
+}
+
 /// Deterministic LCG so model.bin is bit-reproducible.
 struct Lcg(u64);
 impl Lcg {
@@ -100,7 +115,7 @@ pub fn train(
             }
             let mut z = 0.0;
             for t in 0..v {
-                logits[t] = (logits[t] - maxl).exp();
+                logits[t] = dexp(logits[t] - maxl);
                 z += logits[t];
             }
             let p_t = logits[target as usize] / z;

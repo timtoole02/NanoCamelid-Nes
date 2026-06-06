@@ -3,7 +3,7 @@
   "corpus_sha256": "719401712e5ba3c3d39201d7b83175e9acae229bdf360ca5c34f41d29fab6fc5",
   "failed": 0,
   "min_answer_words": 6,
-  "model_sha256": "e8e2384eace2556e959f741b0e33e00b76ba25c11e46604f12a558f05a2f30c8",
+  "model_sha256": "bdc3280b66f7f19dabaef209544f42282ae2cc5da4843e4b85f0c1bab1ec9b37",
   "passed": 50,
   "questions": 50,
   "results": [
@@ -658,7 +658,7 @@
       "word_count": 10
     }
   ],
-  "rom_sha256": "3c3552c1baa35c4053d4ee7df468be588e4215d0d9998ab8075154664db9d748",
+  "rom_sha256": "9d45ca926edce29e7dffe177fbdbaa0cd89143f4f69bfb7fdef7c2681ad7fd83",
   "route_reason_histogram": {
     "EXACT": 1,
     "FALLBACK": 48,

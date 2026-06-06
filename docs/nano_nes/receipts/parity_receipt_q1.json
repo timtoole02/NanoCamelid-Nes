@@ -9,7 +9,7 @@
   "gen_level_max_rust": "TRIGRAM",
   "input_path": "question typed on the on-screen keyboard via emulated controller",
   "min_answer_words": 6,
-  "model_sha256": "e8e2384eace2556e959f741b0e33e00b76ba25c11e46604f12a558f05a2f30c8",
+  "model_sha256": "bdc3280b66f7f19dabaef209544f42282ae2cc5da4843e4b85f0c1bab1ec9b37",
   "nes_decoded_text": "HUMMING CALMS EVERY LLAMA AND GREETS THE DAWN.",
   "nes_done_flag_seen": true,
   "nes_generated_word_ids": [
@@ -24,12 +24,12 @@
     1
   ],
   "nes_reported_budget": 32,
-  "nes_screen_text": "\n\n        NANOCAMELID NES\n\n  Q WHY DO LLAMAS HUM?\n\n\n\n  HUMMING CALMS EVERY LLAMA\n  AND GREETS THE DAWN.#\n\n\n\n\n\n\n\n\n\n\n  TOP .     99  ,     22\n\n      AT    11  QUIET 11\n\n  WORDS 09    B NEW QUESTION\n\n\n\n\n\n",
+  "nes_screen_text": "\n\n        NANOCAMELID NES\n\n  Q WHY DO LLAMAS HUM?\n\n\n\n  HUMMING CALMS EVERY LLAMA\n  AND GREETS THE DAWN.#\n\n\n\n\n\n\n\n\n\n\n  TOP .     96  ,     18\n\n      AT    12  QUIET 10\n\n  WORDS 09    B NEW QUESTION\n\n\n\n\n\n",
   "normalized_input": "WHY DO LLAMAS HUM?",
   "parity": "PASS",
   "question": "WHY DO LLAMAS HUM?",
   "question_type": "WHY",
-  "rom_sha256": "3c3552c1baa35c4053d4ee7df468be588e4215d0d9998ab8075154664db9d748",
+  "rom_sha256": "9d45ca926edce29e7dffe177fbdbaa0cd89143f4f69bfb7fdef7c2681ad7fd83",
   "route_reason_nes": 0,
   "route_reason_rust": "EXACT",
   "rust_generated_word_ids": [
